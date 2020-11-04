@@ -27,3 +27,25 @@ ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
+
+
+
+CREATE OR REPLACE TRIGGER cl.beforeInsertpcp
+BEFORE INSERT
+ON cl.personchatperson
+FOR EACH ROW
+BEGIN
+    :new.creation_date := SYSDATE;
+    :new.creation_user := USER;
+END beforeInsertpcp; 
+
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEpcp
+BEFORE UPDATE
+ON cl.personchatperson
+FOR EACH ROW
+BEGIN
+    :new.date_last_modification:= SYSDATE;
+    :new.user_last_modification:= USER;
+END beforeUPDATEpcp; 

@@ -28,3 +28,24 @@ ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
+
+
+CREATE OR REPLACE TRIGGER cl.beforeInsertpwc
+BEFORE INSERT
+ON cl.personwishclock
+FOR EACH ROW
+BEGIN
+    :new.creation_date := SYSDATE;
+    :new.creation_user := USER;
+END beforeInsertpwc; 
+
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEpwc
+BEFORE UPDATE
+ON cl.personwishclock
+FOR EACH ROW
+BEGIN
+    :new.date_last_modification:= SYSDATE;
+    :new.user_last_modification:= USER;
+END beforeUPDATEpwc; 

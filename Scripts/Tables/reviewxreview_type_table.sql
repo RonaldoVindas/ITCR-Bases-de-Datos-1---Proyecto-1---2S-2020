@@ -25,3 +25,25 @@ ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
+
+
+
+CREATE OR REPLACE TRIGGER cl.beforeInsertrxrt
+BEFORE INSERT
+ON cl.reviewxreview_type
+FOR EACH ROW
+BEGIN
+    :new.creation_date := SYSDATE;
+    :new.creation_user := USER;
+END beforeInsertrxrt; 
+
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeUPDATErxrt
+BEFORE UPDATE
+ON cl.reviewxreview_type
+FOR EACH ROW
+BEGIN
+    :new.date_last_modification:= SYSDATE;
+    :new.user_last_modification:= USER;
+END beforeUPDATErxrt; 

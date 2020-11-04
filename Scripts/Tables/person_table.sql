@@ -49,3 +49,34 @@ ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
+
+
+CREATE SEQUENCE s_person
+START WITH 0
+INCREMENT BY 1
+MINVALUE 0
+MAXVALUE 9999999999
+NOCACHE
+NOCYCLE;
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeInsertperson
+BEFORE INSERT
+ON cl.person
+FOR EACH ROW
+BEGIN
+	:new.id_person := s_person.nextval;
+    :new.creation_date := SYSDATE;
+    :new.creation_user := USER;
+END beforeInsertperson; 
+
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEperson
+BEFORE UPDATE
+ON cl.person
+FOR EACH ROW
+BEGIN
+    :new.date_last_modification:= SYSDATE;
+    :new.user_last_modification:= USER;
+END beforeUPDATEperson; 

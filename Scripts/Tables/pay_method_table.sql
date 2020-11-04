@@ -16,3 +16,33 @@ ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
+
+CREATE SEQUENCE s_pay_method
+START WITH 0
+INCREMENT BY 1
+MINVALUE 0
+MAXVALUE 9999999999
+NOCACHE
+NOCYCLE;
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeInsertpay_method
+BEFORE INSERT
+ON cl.pay_method
+FOR EACH ROW
+BEGIN
+	:new.id_pay_method := s_pay_method.nextval;
+    :new.creation_date := SYSDATE;
+    :new.creation_user := USER;
+END beforeInsertpay_method; 
+
+/
+
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEpay_method
+BEFORE UPDATE
+ON cl.pay_method
+FOR EACH ROW
+BEGIN
+    :new.date_last_modification:= SYSDATE;
+    :new.user_last_modification:= USER;
+END beforeUPDATEpay_method; 
