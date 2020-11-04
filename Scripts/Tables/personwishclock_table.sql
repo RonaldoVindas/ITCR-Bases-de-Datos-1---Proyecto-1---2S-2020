@@ -1,83 +1,72 @@
 /*==================================================CREACIÓN DE TABLAS======================================================*/
 
-CREATE TABLE district(
-    id_district NUMBER(5),
-    district_name VARCHAR2(50) CONSTRAINT district_name_not_null NOT NULL,
-    id_canton NUMBER(5)
+CREATE TABLE personwishclock(
+    id_person NUMBER(5),
+    id_clock NUMBER(20)
 );
 
 /*==================================================COMENTARIOS EN TABLAS Y COLUMNAS======================================================*/
 
-COMMENT ON TABLE district
-IS 'Repository to storage information about districts.';
+COMMENT ON TABLE personwishclock
+IS 'Repository to storage information about diferent wishlist.';
 
 /
 
-COMMENT ON Column district.id_district
-IS 'District identification code.';
+COMMENT ON Column personwishclock.id_person
+IS 'Wishlist owner identification code.';
 
 /
 
-COMMENT ON Column district.district_name
-IS 'District name.';
+COMMENT ON Column personwishclock.id_clock
+IS 'Wihlist clock indentification code.';
 
-/
 
-COMMENT ON Column district.id_canton
-IS 'Canton identification code.';
 
 /*==================================================CREACIÓN DE LLAVES PRIMARIAS======================================================*/
 
-
-ALTER TABLE district
-ADD CONSTRAINT pk_district PRIMARY KEY (id_district)
+ALTER TABLE personwishclock
+ADD CONSTRAINT pk_personwishclock PRIMARY KEY (id_person, id_clock)
 USING INDEX 
 TABLESPACE cl_ind PCTFREE 20
 STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
 
 /*==================================================CREACIÓN DE LLAVES FORÁNEAS======================================================*/
 
-ALTER TABLE district
-ADD CONSTRAINT fk_district_canton FOREIGN KEY
-(id_canton) REFERENCES canton(id_canton);
+ALTER TABLE personwishclock
+ADD CONSTRAINT fk_personwishclock_person FOREIGN KEY
+(id_person) REFERENCES person(id_person);
+
+ALTER TABLE personwishclock
+ADD CONSTRAINT fk_personwishclock_clock FOREIGN KEY
+(id_clock) REFERENCES clock(id_clock);
 
 
 /*==================================================CAMPOS DE AUDITORÍA PARA TABLAS======================================================*/
 
-ALTER TABLE district
+ALTER TABLE personwishclock
 ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
 
-/*==================================================CREACIÓN DE SECUENCIAS PARA TABLAS======================================================*/
-CREATE SEQUENCE s_district
-START WITH 0
-INCREMENT BY 1
-MINVALUE 0
-MAXVALUE 999999999999
-NOCACHE
-NOCYCLE;
-
 /*==================================================CREACIÓN DE TRIGGERS PARA TABLAS======================================================*/
 
-CREATE OR REPLACE TRIGGER cl.beforeInsertdistrict
+CREATE OR REPLACE TRIGGER cl.beforeInsertpersonwishclock
 BEFORE INSERT
-ON cl.district
+ON cl.personwishclock
 FOR EACH ROW
 BEGIN
-	:new.id_district := s_district.nextval;
     :new.creation_date := SYSDATE;
     :new.creation_user := USER;
-END beforeInsertdistrict; 
+END beforeInsertpersonwishclock; 
 
 /
 
-CREATE OR REPLACE TRIGGER cl.beforeUPDATEdistrict
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEpersonwishclock
 BEFORE UPDATE
-ON cl.district
+ON cl.personwishclock
 FOR EACH ROW
 BEGIN
     :new.date_last_modification:= SYSDATE;
     :new.user_last_modification:= USER;
-END beforeUPDATEdistrict; 
+END beforeUPDATEpersonwishclock; 

@@ -1,57 +1,43 @@
 /*==================================================CREACIÓN DE TABLAS======================================================*/
 
-CREATE TABLE district(
-    id_district NUMBER(5),
-    district_name VARCHAR2(50) CONSTRAINT district_name_not_null NOT NULL,
-    id_canton NUMBER(5)
+CREATE TABLE phone(
+    id_phone NUMBER(5),
+    phone_number NUMBER(20) CONSTRAINT phone_number_not_null NOT NULL
 );
 
 /*==================================================COMENTARIOS EN TABLAS Y COLUMNAS======================================================*/
 
-COMMENT ON TABLE district
-IS 'Repository to storage information about districts.';
+COMMENT ON TABLE phone
+IS 'Repository to storage information about user´s phones.';
 
 /
 
-COMMENT ON Column district.id_district
-IS 'District identification code.';
+COMMENT ON Column phone.id_phone
+IS 'Phone identification code.';
 
 /
 
-COMMENT ON Column district.district_name
-IS 'District name.';
-
-/
-
-COMMENT ON Column district.id_canton
-IS 'Canton identification code.';
+COMMENT ON Column phone.phone_number
+IS 'Phone name.';
 
 /*==================================================CREACIÓN DE LLAVES PRIMARIAS======================================================*/
 
-
-ALTER TABLE district
-ADD CONSTRAINT pk_district PRIMARY KEY (id_district)
+ALTER TABLE  phone
+ADD CONSTRAINT pk_phone PRIMARY KEY (id_phone)
 USING INDEX 
 TABLESPACE cl_ind PCTFREE 20
 STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
 
-/*==================================================CREACIÓN DE LLAVES FORÁNEAS======================================================*/
-
-ALTER TABLE district
-ADD CONSTRAINT fk_district_canton FOREIGN KEY
-(id_canton) REFERENCES canton(id_canton);
-
-
 /*==================================================CAMPOS DE AUDITORÍA PARA TABLAS======================================================*/
 
-ALTER TABLE district
+ALTER TABLE phone
 ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
 
 /*==================================================CREACIÓN DE SECUENCIAS PARA TABLAS======================================================*/
-CREATE SEQUENCE s_district
+CREATE SEQUENCE s_phone
 START WITH 0
 INCREMENT BY 1
 MINVALUE 0
@@ -61,23 +47,23 @@ NOCYCLE;
 
 /*==================================================CREACIÓN DE TRIGGERS PARA TABLAS======================================================*/
 
-CREATE OR REPLACE TRIGGER cl.beforeInsertdistrict
+CREATE OR REPLACE TRIGGER cl.beforeInsertphone
 BEFORE INSERT
-ON cl.district
+ON cl.phone
 FOR EACH ROW
 BEGIN
-	:new.id_district := s_district.nextval;
+	:new.id_phone := s_phone.nextval;
     :new.creation_date := SYSDATE;
     :new.creation_user := USER;
-END beforeInsertdistrict; 
+END beforeInsertphone; 
 
 /
 
-CREATE OR REPLACE TRIGGER cl.beforeUPDATEdistrict
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEphone
 BEFORE UPDATE
-ON cl.district
+ON cl.phone
 FOR EACH ROW
 BEGIN
     :new.date_last_modification:= SYSDATE;
     :new.user_last_modification:= USER;
-END beforeUPDATEdistrict; 
+END beforeUPDATEphone; 

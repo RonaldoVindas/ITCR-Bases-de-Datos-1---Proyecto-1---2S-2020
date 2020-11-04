@@ -1,83 +1,68 @@
 /*==================================================CREACIÓN DE TABLAS======================================================*/
 
-CREATE TABLE district(
-    id_district NUMBER(5),
-    district_name VARCHAR2(50) CONSTRAINT district_name_not_null NOT NULL,
-    id_canton NUMBER(5)
+CREATE TABLE personxphone(
+    id_person NUMBER(5),
+    id_phone NUMBER(20)
 );
 
 /*==================================================COMENTARIOS EN TABLAS Y COLUMNAS======================================================*/
-
-COMMENT ON TABLE district
-IS 'Repository to storage information about districts.';
-
-/
-
-COMMENT ON Column district.id_district
-IS 'District identification code.';
+COMMENT ON TABLE personxphone
+IS 'Repository to storage information about associated phones to persons.';
 
 /
 
-COMMENT ON Column district.district_name
-IS 'District name.';
+COMMENT ON Column personxphone.id_person
+IS 'Person identification code.';
 
 /
 
-COMMENT ON Column district.id_canton
-IS 'Canton identification code.';
+COMMENT ON Column personxphone.id_phone
+IS 'Phone code.';
 
 /*==================================================CREACIÓN DE LLAVES PRIMARIAS======================================================*/
 
-
-ALTER TABLE district
-ADD CONSTRAINT pk_district PRIMARY KEY (id_district)
+ALTER TABLE personxphone
+ADD CONSTRAINT pk_personxphone PRIMARY KEY (id_person, id_phone)
 USING INDEX 
 TABLESPACE cl_ind PCTFREE 20
 STORAGE (INITIAL 10K NEXT 10K PCTINCREASE 0);
 
 /*==================================================CREACIÓN DE LLAVES FORÁNEAS======================================================*/
 
-ALTER TABLE district
-ADD CONSTRAINT fk_district_canton FOREIGN KEY
-(id_canton) REFERENCES canton(id_canton);
+ALTER TABLE personxphone
+ADD CONSTRAINT fk_personxphone_person FOREIGN KEY
+(id_person) REFERENCES person(id_person);
 
+ALTER TABLE personxphone
+ADD CONSTRAINT fk_personxphone_phone FOREIGN KEY
+(id_phone) REFERENCES phone(id_phone);
 
 /*==================================================CAMPOS DE AUDITORÍA PARA TABLAS======================================================*/
 
-ALTER TABLE district
+ALTER TABLE personxphone
 ADD creation_date DATE
 ADD creation_user VARCHAR(10)
 ADD date_last_modification DATE
 ADD user_last_modification VARCHAR(10);
 
-/*==================================================CREACIÓN DE SECUENCIAS PARA TABLAS======================================================*/
-CREATE SEQUENCE s_district
-START WITH 0
-INCREMENT BY 1
-MINVALUE 0
-MAXVALUE 999999999999
-NOCACHE
-NOCYCLE;
-
 /*==================================================CREACIÓN DE TRIGGERS PARA TABLAS======================================================*/
 
-CREATE OR REPLACE TRIGGER cl.beforeInsertdistrict
+CREATE OR REPLACE TRIGGER cl.beforeInsertpersonxphone
 BEFORE INSERT
-ON cl.district
+ON cl.personxphone
 FOR EACH ROW
 BEGIN
-	:new.id_district := s_district.nextval;
     :new.creation_date := SYSDATE;
     :new.creation_user := USER;
-END beforeInsertdistrict; 
+END beforeInsertpersonxphone; 
 
 /
 
-CREATE OR REPLACE TRIGGER cl.beforeUPDATEdistrict
+CREATE OR REPLACE TRIGGER cl.beforeUPDATEpersonxphone
 BEFORE UPDATE
-ON cl.district
+ON cl.personxphone
 FOR EACH ROW
 BEGIN
     :new.date_last_modification:= SYSDATE;
     :new.user_last_modification:= USER;
-END beforeUPDATEdistrict; 
+END beforeUPDATEpersonxphone; 
