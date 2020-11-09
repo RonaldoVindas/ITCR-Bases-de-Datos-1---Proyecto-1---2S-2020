@@ -16,11 +16,11 @@ ADD CONSTRAINT fk_personsellclock_person FOREIGN KEY
 (id_person) REFERENCES person(id_person);
 
 
-/*
+
 ALTER TABLE personsellclock
 ADD CONSTRAINT fk_personsellclock_clock FOREIGN KEY
 (id_clock) REFERENCES clock(id_clock);
-*/
+
 
 
 ALTER TABLE personsellclock
