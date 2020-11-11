@@ -49,7 +49,7 @@ begin
     END IF;
     EXCEPTION
     WHEN e_invalid_exc THEN
-        DBMS_OUTPUT.PUT_LINE('No such phone.');
+        DBMS_OUTPUT.PUT_LINE('No such row.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
