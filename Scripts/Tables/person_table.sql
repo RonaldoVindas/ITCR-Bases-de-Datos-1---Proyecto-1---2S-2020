@@ -1,4 +1,4 @@
-/*Sin querer perdí el script original en la transición del guardado local a la carpeta del repositorio,
+﻿/*Sin querer perdí el script original en la transición del guardado local a la carpeta del repositorio,
 este script fue generado automáticamente por el sql developer y es equivalente al script original.*/
 
 
@@ -83,7 +83,6 @@ BEFORE INSERT
 ON cl.person
 FOR EACH ROW
 BEGIN
-    :new.id_person := s_person.nextval;
     :new.creation_date := SYSDATE;
     :new.creation_user := USER;
 END beforeInsertperson; 
