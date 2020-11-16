@@ -1,4 +1,4 @@
----Nuevos Alters
+---Nuevos Alters---
 alter table person modify (id_person number(9));
 alter table clock modify (manifacturing_date number(4));
 alter table clock modify (model varchar2(50));

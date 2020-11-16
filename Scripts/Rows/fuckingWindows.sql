@@ -78,7 +78,7 @@ Insert into photo(name, photo_info) values('photoB', 'clock28');
 Insert into photo(name, photo_info) values('photoB', 'clock29');
 Insert into photo(name, photo_info) values('photoB', 'clock30');
 
-
+---
 /
 
 Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('117820091','Jose','Blanco',to_date('28/03/99','DD/MM/RR'),'ABC@gmail.com','MuffinTime','ptm123','0','0','1','0','2',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
