@@ -1,7 +1,7 @@
 create or replace package control_type_person is
 procedure insert_type_person(p_name in varchar2);
 procedure remove_type_person(pid in number);
-procedure update_type_person(p_name in varchar2, pid number);
+procedure update_type_person( pid number,p_name in varchar2);
 function gettype_person(pId in number) return varchar2 ;
 function getIDtype_person(ptype_person in varchar2)return number;
 end control_type_person;
@@ -36,7 +36,7 @@ begin
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
 end remove_type_person;
 
-procedure update_type_person(p_name in varchar2, pid number)as 
+procedure update_type_person(pid number,p_name in varchar2 )as 
 e_invalid_type_person EXCEPTION;
 begin
     update type_person

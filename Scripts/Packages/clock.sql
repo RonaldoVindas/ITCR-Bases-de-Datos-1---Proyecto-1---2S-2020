@@ -1,411 +1,332 @@
-CREATE OR REPLACE PACKAGE control_person IS
+CREATE OR REPLACE PACKAGE control_clock IS
 
-FUNCTION EncryptPassword(pencrypt_password IN VARCHAR2) RETURN VARCHAR2;
-PROCEDURE insert_person(pid_person IN NUMBER,pfirst_name IN VARCHAR2, plast_name VARCHAR2, pbirth_day DATE,  pemail VARCHAR, pid_gender NUMBER, pid_nationality NUMBER, 
-                                            pid_type_person NUMBER, pid_district NUMBER);
-PROCEDURE insert_user(pid_person IN NUMBER,pfirst_name IN VARCHAR2, plast_name VARCHAR2, pbirth_day DATE,  pemail VARCHAR2, pusername VARCHAR2, ppassword VARCHAR2, 
-                                        pid_gender NUMBER, pid_nationality NUMBER, pid_type_person NUMBER, pid_district NUMBER);
-PROCEDURE remove_person(pid_person IN NUMBER);
-PROCEDURE update_person_first_name(pid_person IN NUMBER, pfirst_name IN VARCHAR2);
-PROCEDURE update_person_last_name(pid_person IN NUMBER, plast_name IN VARCHAR2);
-PROCEDURE update_person_birthday(pid_person IN NUMBER, pbirth_day IN DATE);
-PROCEDURE update_person_email(pid_person IN NUMBER, pemail IN VARCHAR2);
-PROCEDURE update_person_username(pid_person IN NUMBER, puser_name IN VARCHAR2);
-PROCEDURE update_person_password(pid_person IN NUMBER, ppassword IN VARCHAR2);
-PROCEDURE update_person_id_gender(pid_person IN NUMBER, pid_gender IN NUMBER);
-PROCEDURE update_person_id_nationality(pid_person IN NUMBER, pid_nationality IN NUMBER);
-PROCEDURE update_person_type_person(pid_person IN NUMBER, ptype IN NUMBER);
-PROCEDURE update_person_photo(pid_person IN NUMBER, pphoto IN NUMBER);
-PROCEDURE update_person_district(pid_person IN NUMBER, pdistrict IN NUMBER);
-FUNCTION getPersonFirstName(pid_person IN NUMBER) RETURN VARCHAR2 ;
-FUNCTION getPersonLastName(pid_person IN NUMBER) RETURN VARCHAR2;
-FUNCTION getPersonBirthDay(pid_person IN NUMBER) RETURN DATE;
-FUNCTION getPersonUsername(pid_person IN NUMBER) RETURN VARCHAR2;
-FUNCTION getPersonPassword(pid_person IN NUMBER) RETURN VARCHAR2;
-FUNCTION getPersonIdGender(pid_person IN NUMBER) RETURN NUMBER;
-FUNCTION getPersonAge(pId IN NUMBER) RETURN NUMBER;
-FUNCTION getPersonIdNationality(pid_person IN NUMBER) RETURN NUMBER;
-FUNCTION getPersonIdTypePerson(pid_person IN NUMBER) RETURN NUMBER;
-FUNCTION getPersonIdDistrict(pid_person IN NUMBER) RETURN NUMBER;
-FUNCTION getPersonIdPhoto(pid_person IN NUMBER) RETURN NUMBER;
-
-END control_person; 
+PROCEDURE insert_clock(pid_clock IN NUMBER,pname IN VARCHAR2, pmodel VARCHAR2, pdescription VARCHAR2,  pmanifacturing_Date DATE, pprice NUMBER, pid_binnacle NUMBER, pid_shipping_type NUMBER, 
+                                            pid_category NUMBER, pid_brand NUMBER, pid_status NUMBER, pid_condition NUMBER, pid_photo NUMBER);
+PROCEDURE remove_clock(pid_clock IN NUMBER);
+PROCEDURE update_clock_name(pid_clock IN NUMBER, pname IN VARCHAR2);
+PROCEDURE update_clock_model(pid_clock IN NUMBER, pmodel IN VARCHAR2);
+PROCEDURE update_clock_description(pid_clock IN NUMBER, pdescription IN VARCHAR2);
+PROCEDURE update_clock_date(pid_clock IN NUMBER, pmanifacturing_date IN DATE);
+PROCEDURE update_clock_price(pid_clock IN NUMBER, pprice IN NUMBER);
+PROCEDURE update_clock_id_binnacle(pid_clock IN NUMBER, pid IN NUMBER);
+PROCEDURE update_clock_id_shipping(pid_clock IN NUMBER, pid IN NUMBER);
+PROCEDURE update_clock_id_category(pid_clock IN NUMBER, pid IN NUMBER);
+PROCEDURE update_clock_id_brand(pid_clock IN NUMBER, pid IN NUMBER);
+PROCEDURE update_clock_id_status(pid_clock IN NUMBER, pid IN NUMBER);
+PROCEDURE update_clock_id_condition(pid_clock IN NUMBER, pid IN NUMBER);
+PROCEDURE update_clock_id_photo(pid_clock IN NUMBER, pid IN NUMBER);
+FUNCTION getclockName(pid_clock IN NUMBER) RETURN VARCHAR2 ;
+FUNCTION getclockmodel(pid_clock IN NUMBER) RETURN VARCHAR2 ;
+FUNCTION getclockdescription(pid_clock IN NUMBER) RETURN VARCHAR2;
+FUNCTION getclockdate(pid_clock IN NUMBER) RETURN DATE;
+FUNCTION getclockprice(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidbinnacle(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidshipping(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidcategory(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidbrand(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidstatus(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidcondition(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockidphoto(pid_clock IN NUMBER) RETURN NUMBER;
+END control_clock;
 /
-CREATE OR REPLACE PACKAGE BODY control_person IS
-
-FUNCTION EncryptPassword(pencrypt_password IN VARCHAR2) RETURN VARCHAR2
-AS
-    data VARCHAR2(255);
-    BEGIN
-    data := rpad(pencrypt_password, (trunc(length(pencrypt_password)/8)+1)*8, chr(0) );
-    dbms_obfuscation_toolkit.DESEncrypt
-          ( input_string => data,
-            key_string   => 'DBAKey03',
-            encrypted_string=> data );
- 
-    RETURN data;
-  END;
-  
+CREATE OR REPLACE PACKAGE BODY control_clock IS
 
 
-PROCEDURE insert_person(pid_person IN NUMBER,pfirst_name IN VARCHAR2, plast_name VARCHAR2, pbirth_day DATE,  pemail VARCHAR, pid_gender NUMBER, pid_nationality NUMBER, 
-                                            pid_type_person NUMBER, pid_district NUMBER)  AS
-
+PROCEDURE insert_clock(pid_clock IN NUMBER,pname IN VARCHAR2, pmodel VARCHAR2, pdescription VARCHAR2,  pmanifacturing_Date DATE, pprice NUMBER, pid_binnacle NUMBER, pid_shipping_type NUMBER, 
+                                            pid_category NUMBER, pid_brand NUMBER, pid_status NUMBER, pid_condition NUMBER, pid_photo NUMBER)AS
 BEGIN 
-	INSERT INTO person(id_person,first_name, last_name, birthday, email, id_gender, id_nationality, id_type_person,id_district)
-	VALUES(pid_person,pfirst_name, plast_name, pbirth_day, pemail, pid_gender, pid_nationality, pid_type_person, pid_district);
+	INSERT INTO clock(id_clock, name, model, description,  manifacturing_Date, price, id_binnacle, id_shipping_type, 
+                                            id_category, id_brand, id_status, id_condition, id_photo)
+	VALUES(pid_clock, pname, pmodel, pdescription,  pmanifacturing_Date, pprice, pid_binnacle, pid_shipping_type, 
+                                            pid_category, pid_brand, pid_status, pid_condition, pid_photo);
 	COMMIT;
-END insert_person;
+END insert_clock;
 
-
-PROCEDURE insert_user(pid_person IN NUMBER,pfirst_name IN VARCHAR2, plast_name VARCHAR2, pbirth_day DATE,  pemail VARCHAR2, pusername VARCHAR2, ppassword VARCHAR2, 
-                                        pid_gender NUMBER, pid_nationality NUMBER, pid_type_person NUMBER, pid_district NUMBER) AS
-BEGIN 
-	INSERT INTO person(id_person,first_name, last_name, birthday, email, username, user_password, id_gender, id_nationality, id_type_person, id_district)
-	VALUES(pid_person,pfirst_name, plast_name, pbirth_day, pemail, pusername, encryptpassword(ppassword), pid_gender, pid_nationality,pid_type_person,pid_district);
-    COMMIT;
-END insert_user;
-
-PROCEDURE remove_person (pid_person IN NUMBER) AS
-e_invalid_person EXCEPTION;
+PROCEDURE remove_clock (pid_clock IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	DELETE FROM person
-	WHERE id_person = pid_person;
+	DELETE FROM clock
+	WHERE id_clock = pid_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to remove.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END remove_person;
+END remove_clock;
 
 
 
-PROCEDURE update_person_first_name(pid_person IN NUMBER, pfirst_name IN VARCHAR2) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_name(pid_clock IN NUMBER, pname IN VARCHAR2) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET first_name = pfirst_name
-	WHERE id_person = id_person;
+	UPDATE clock
+	SET name = pname
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_first_name;
+END update_clock_name;
 
-
-PROCEDURE update_person_last_name(pid_person IN NUMBER, plast_name IN VARCHAR2) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_model(pid_clock IN NUMBER, pmodel IN VARCHAR2) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET last_name = plast_name
-	WHERE id_person = pid_person;
+	UPDATE clock
+	SET model = pmodel
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_last_name;
+END update_clock_model;
 
-
-PROCEDURE update_person_birthday(pid_person IN NUMBER, pbirth_day IN DATE) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_description(pid_clock IN NUMBER, pdescription IN VARCHAR2) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET birthday = pbirth_day
-    WHERE id_person = pid_person;
-    COMMIT;
-    IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
-    END IF;
-    EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
-        DBMS_OUTPUT.PUT_LINE(SQLERRM);
-        DBMS_OUTPUT.PUT_LINE(SQLCODE);
-    WHEN OTHERS THEN
-        DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
-        DBMS_OUTPUT.PUT_LINE(SQLERRM);
-        DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_birthday;
-
-
-PROCEDURE update_person_email(pid_person IN NUMBER, pemail IN VARCHAR2) AS
-e_invalid_person EXCEPTION;
-BEGIN
-	UPDATE person
-	SET email = pemail
-	WHERE id_person = pid_person;
+	UPDATE clock
+	SET description = pdescription
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_email;
+END update_clock_description;
 
-
-PROCEDURE update_person_username(pid_person IN NUMBER, puser_name IN VARCHAR2) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_date(pid_clock IN NUMBER, pmanifacturing_date IN DATE)AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET username = puser_name
-	WHERE id_person = id_person;
+	UPDATE clock
+	SET manifacturing_date = pmanifacturing_date
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_username;
+END update_clock_date;
 
-
-PROCEDURE update_person_type_person(pid_person IN NUMBER, ptype IN NUMBER)
-as
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_price(pid_clock IN NUMBER, pprice IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET id_type_person = ptype
-	WHERE id_person = id_person;
+	UPDATE clock
+	SET price = pprice
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_type_person;
+END update_clock_price;
 
 
-PROCEDURE update_person_password(pid_person IN NUMBER, ppassword IN VARCHAR2) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_id_binnacle(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET user_password = ppassword
-	WHERE id_person = id_person;
+	UPDATE clock
+	SET id_binnacle = pid
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_password;
+END update_clock_id_binnacle;
 
 
-PROCEDURE update_person_id_gender(pid_person IN NUMBER, pid_gender IN NUMBER) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_id_shipping(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET id_gender = pid_gender
-	WHERE id_person = pid_person;
+	UPDATE clock
+	SET id_shipping_type = pid
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_id_gender;
+END update_clock_id_shipping;
 
-
-PROCEDURE update_person_id_nationality(pid_person IN NUMBER, pid_nationality IN NUMBER) AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_id_category(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET id_nationality = pid_nationality
-	WHERE id_person = pid_person;
+	UPDATE clock
+	SET id_category = pid
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_id_nationality;
+END update_clock_id_category;
 
-
-PROCEDURE update_person_district(pid_person IN NUMBER, pdistrict IN NUMBER)AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_id_brand(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET id_district = pdistrict
-	WHERE id_person = pid_person;
+	UPDATE clock
+	SET id_brand = pid
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_district;
+END update_clock_id_brand;
 
-PROCEDURE update_person_photo(pid_person IN NUMBER, pphoto IN NUMBER)AS
-e_invalid_person EXCEPTION;
+PROCEDURE update_clock_id_status(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
 BEGIN
-	UPDATE person
-	SET id_photo = pphoto
-	WHERE id_person = pid_person;
+	UPDATE clock
+	SET id_status = pid
+	WHERE id_clock = id_clock;
 	COMMIT;
     IF SQL%NOTFOUND THEN 
-        RAISE e_invalid_person;
+        RAISE e_invalid_clock;
     END IF;
     EXCEPTION
-    WHEN e_invalid_person THEN
-        DBMS_OUTPUT.PUT_LINE('No such person.');
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
-END update_person_photo;
+END update_clock_id_status;
 
+PROCEDURE update_clock_id_condition(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
+BEGIN
+	UPDATE clock
+	SET id_condition = pid
+	WHERE id_clock = id_clock;
+	COMMIT;
+    IF SQL%NOTFOUND THEN 
+        RAISE e_invalid_clock;
+    END IF;
+    EXCEPTION
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+END update_clock_id_condition;
 
-FUNCTION getPersonFirstName(pid_person IN NUMBER) RETURN VARCHAR2
-IS 
-    vcPersonFirstName VARCHAR2(20);
-    BEGIN
-        SELECT first_name
-        INTO vcPersonFirstName
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonFirstName);
-        EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-    END;
+PROCEDURE update_clock_id_photo(pid_clock IN NUMBER, pid IN NUMBER) AS
+e_invalid_clock EXCEPTION;
+BEGIN
+	UPDATE clock
+	SET id_photo = pid
+	WHERE id_clock = id_clock;
+	COMMIT;
+    IF SQL%NOTFOUND THEN 
+        RAISE e_invalid_clock;
+    END IF;
+    EXCEPTION
+    WHEN e_invalid_clock THEN
+        DBMS_OUTPUT.PUT_LINE('No such clock.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to update.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+END update_clock_id_photo;
 
-
-FUNCTION getPersonLastName(pid_person IN NUMBER) RETURN VARCHAR2
+FUNCTION getclockName(pid_clock IN NUMBER) RETURN VARCHAR2
 IS
-    vcPersonLastName VARCHAR2(30);
+    vcPerson VARCHAR2(20);
     BEGIN
-        SELECT last_name
-        INTO vcPersonLastName
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonLastName);
-        EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-    END;
-    
-FUNCTION getPersonBirthDay(pid_person IN NUMBER) RETURN DATE
-IS 
-    vcPersonBirthDay DATE;
-    BEGIN
-        SELECT birthday
-        INTO vcPersonBirthDay
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonBirthDay);
-        EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-    END;
-  
-FUNCTION getPersonEmail(pid_person IN NUMBER) RETURN VARCHAR2
-IS 
-    vcPersonEmail VARCHAR2(50);
-    BEGIN
-        SELECT email
-        INTO vcPersonEmail
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonEmail);
+        SELECT name
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
         EXCEPTION
             WHEN TOO_MANY_ROWS THEN
             DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
@@ -419,16 +340,15 @@ IS
             DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
     END;
 
-    
-FUNCTION getPersonUsername(pid_person IN NUMBER) RETURN VARCHAR2
-IS 
-    vcPersonUsername VARCHAR2(50);
+FUNCTION getclockmodel(pid_clock IN NUMBER) RETURN VARCHAR2
+IS
+    vcPerson VARCHAR2(20);
     BEGIN
-        SELECT username
-        INTO vcPersonUsername
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonUsername);
+        SELECT model
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
         EXCEPTION
             WHEN TOO_MANY_ROWS THEN
             DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
@@ -442,15 +362,15 @@ IS
             DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
     END;
 
-FUNCTION getPersonPassword(pid_person IN NUMBER) RETURN VARCHAR2
+FUNCTION getclockdescription(pid_clock IN NUMBER) RETURN VARCHAR2
 IS
-    vcPersonPassword VARCHAR(50);
+    vcPerson VARCHAR2(20);
     BEGIN
-        SELECT user_password
-        INTO vcPersonPassword
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonPassword);
+        SELECT description
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
         EXCEPTION
             WHEN TOO_MANY_ROWS THEN
             DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
@@ -463,60 +383,17 @@ IS
             WHEN OTHERS THEN
             DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
     END;
-    
-FUNCTION getPersonIdGender(pid_person IN NUMBER) RETURN NUMBER
-IS
-    vcPersonIdGender NUMBER(6);
-    BEGIN
-        SELECT id_gender
-        INTO vcPersonIdGender
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonIdGender);
-        EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-    END;
-    
-FUNCTION getPersonAge(pId IN NUMBER) RETURN NUMBER
-IS vcAge NUMBER(4);
-BEGIN
-    SELECT  Trunc((sysdate-birthday)/365) 
-    INTO vcAge
-    FROM person 
-    WHERE id_person = pId;
-    RETURN (vcAge);
-    EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-END;
 
 
-FUNCTION getPersonIdNationality(pid_person IN NUMBER) RETURN NUMBER
+FUNCTION getclockdate(pid_clock IN NUMBER) RETURN DATE
 IS
-    vcPersonIdNat NUMBER(6);
+    vcPerson DATE;
     BEGIN
-        SELECT id_nationality
-        INTO vcPersonIdNat
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonIdNat);
+        SELECT manifacturing_date
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
         EXCEPTION
             WHEN TOO_MANY_ROWS THEN
             DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
@@ -529,62 +406,170 @@ IS
             WHEN OTHERS THEN
             DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
     END;
-    
-FUNCTION getPersonIdPhoto(pid_person IN NUMBER) RETURN NUMBER
+
+FUNCTION getclockprice(pid_clock IN NUMBER) RETURN NUMBER
 IS
-    vcPersonIdPhoto NUMBER(6);
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT price
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidbinnacle(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT id_binnacle
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidshipping(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT id_shipping_type
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidcategory(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT id_category
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidbrand(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT id_brand
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidstatus(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT id_status
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidcondition(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
+    BEGIN
+        SELECT id_condition
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
+
+FUNCTION getclockidphoto(pid_clock IN NUMBER) RETURN NUMBER
+IS
+    vcPerson NUMBER(30);
     BEGIN
         SELECT id_photo
-        INTO vcPersonIdPhoto
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonIdPhoto);
-        EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-    END;
-    
-FUNCTION getPersonIdDistrict(pid_person IN NUMBER) RETURN NUMBER
-IS
-    vcPersonIdDistrict NUMBER(6);
-    BEGIN
-        SELECT id_district
-        INTO vcPersonIdDistrict
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonIdDistrict);
-        EXCEPTION
-            WHEN TOO_MANY_ROWS THEN
-            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
-            WHEN NO_DATA_FOUND THEN
-            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
-            WHEN STORAGE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
-            WHEN VALUE_ERROR THEN
-            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
-            WHEN OTHERS THEN
-            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
-    END;
-
-
-
-FUNCTION getPersonIdTypePerson(pid_person IN NUMBER) RETURN NUMBER
-IS 
-    vcPersonIdTypePerson NUMBER(6);
-    BEGIN
-        SELECT id_type_person
-        INTO vcPersonIdTypePerson
-        FROM person
-        WHERE id_person = pid_person;
-        RETURN(vcPersonIdTypePerson);
+        INTO vcPerson
+        FROM clock
+        WHERE id_clock = pid_clock;
+        RETURN(vcPerson);
         EXCEPTION
             WHEN TOO_MANY_ROWS THEN
             DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
@@ -601,4 +586,12 @@ IS
 
 
 
-END control_person;
+
+
+
+
+
+
+
+END control_clock;
+

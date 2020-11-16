@@ -1,14 +1,14 @@
 create or replace package control_phone is
-procedure insert_phone(p_name in varchar2);
+procedure insert_phone(p_name in number);
 procedure remove_phone(pid in number);
-procedure update_phone(p_name in varchar2, pid number);
-function getPhoneNumber(pId in number) return varchar2 ;
-function getIDphone(pphone in varchar2)return number;
+procedure update_phone(p_name in number, pid number);
+function getPhoneNumber(pId in number) return number ;
+function getIDphone(pphone in number)return number;
 end control_phone;
 /
 create or replace PACKAGE BODY control_phone IS
 
-procedure insert_phone (p_name in varchar2)as
+procedure insert_phone (p_name in number)as
 begin
     insert into phone(phone_number)
     values (p_name);
@@ -36,7 +36,7 @@ begin
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
 end remove_phone;
 
-procedure update_phone(p_name in varchar2, pid number)as 
+procedure update_phone(p_name in number, pid number)as 
 e_invalid_phone EXCEPTION;
 begin
     update phone
@@ -57,7 +57,7 @@ begin
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
 end update_phone;
 
-function getPhoneNumber(pId in number) return varchar2 
+function getPhoneNumber(pId in number) return number
 is vcName number(30);
 begin
     select phone_number
@@ -79,7 +79,7 @@ begin
 END;
 
 
-function getIDphone(pphone in varchar2)return number
+function getIDphone(pphone in number)return number
 is vcID NUMBER(10);
 begin
     select id_phone
