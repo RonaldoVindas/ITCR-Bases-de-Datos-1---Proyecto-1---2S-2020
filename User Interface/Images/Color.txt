@@ -1,0 +1,27 @@
+#Morado
+	#AD11C6
+#Dorado**				Íconos lateral, Mouse Retired
+	#5C4F2E		92,79,46
+#Dorado Oscuro 				Íconos, MouseEntered
+	#443A22   	68,58,34
+
+#Dorado Claro*				InternalFrame Header
+	#988E62		152,142,98
+#Beige
+	#ADA47B
+#Beige Claro
+	#B79F63		183,159,99
+
+
+#Cafe					Texto
+	#20150E		32,21,14
+
+#Cafe Claro
+	#392519		57,37,25
+#Blanco un poco oscuro
+ 	#D8D8D8         216,216,216
+#Blanco
+	#FFFFFF		255,255,255
+
+Consolas 48
+tahoma 36
