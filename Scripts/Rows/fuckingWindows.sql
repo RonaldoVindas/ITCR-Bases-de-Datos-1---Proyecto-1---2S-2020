@@ -42,8 +42,9 @@ Insert into photo(name, photo_info) values('photoA', 'person7');
 Insert into photo(name, photo_info) values('photoA', 'person8');
 Insert into photo(name, photo_info) values('photoA', 'person9');
 Insert into photo(name, photo_info) values('photoA', 'person10');
-
-
+Insert into photo(name, photo_info) values('photoA', 'person11');
+Insert into photo(name, photo_info) values('photoA', 'person12');
+Insert into photo(name, photo_info) values('photoA', 'person13');
 
 Insert into photo(name, photo_info) values('photoB', 'clock1');
 Insert into photo(name, photo_info) values('photoB', 'clock2');
@@ -88,15 +89,50 @@ Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,US
 Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('517820091','Ignes','Salazar',to_date('12/03/70','DD/MM/RR'),'salazarIG@gmail.com','ignite','tuturuuu','1','4','1','4','26',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
 Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('617820091','Eduardo','Tosi',to_date('10/04/60','DD/MM/RR'),'tosino@gmail.com','bacon','puddin','0','5','1','5','32',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
 Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('717820091','Rachel','Ziegler',to_date('22/06/87','DD/MM/RR'),'RachelZZ@gmail.com','mercy','heros','1','1','1','6','61',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
-Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('817820091','Karolina','Rivera',to_date('07/05/00','DD/MM/RR'),'KIRS@gmail.com','River','missing','1','2','1','7','13',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
 Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('917820091','Noah','Cambronero',to_date('20/01/92','DD/MM/RR'),'NoahCam@gmail.com','Sliced_Water','paz1515','0','3','1','8','55',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
 Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('107820091','Diego','Rodriguez',to_date('02/07/98','DD/MM/RR'),'Diegor@gmail.com','IDIR','clave','0','4','0','9','13',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
-
-
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('111761013','Ronaldo','Vindas',to_date('12/11/00','DD/MM/RR'),'rony@gmail.com','Rony12','crash','0','0','0','40','2',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
 
 /
 
+Insert into phone(phone_number) values(22565016);
+Insert into phone(phone_number) values(85488848);
+Insert into phone(phone_number) values(22212019);
+Insert into phone(phone_number) values(25625387);
+Insert into phone(phone_number) values(60122291);
+Insert into phone(phone_number) values(60106260);
+Insert into phone(phone_number) values(87524697);
+Insert into phone(phone_number) values(22367597);
+Insert into phone(phone_number) values(23314168);
+Insert into phone(phone_number) values(24165033);
 
+/
+
+insert into personxphone(id_person, id_phone) values(117820091,0);
+insert into personxphone(id_person, id_phone) values(217820091,1); 
+insert into personxphone(id_person, id_phone) values(317820091,2);
+insert into personxphone(id_person, id_phone) values(417820091,3);
+insert into personxphone(id_person, id_phone) values(517820091,4);
+insert into personxphone(id_person, id_phone) values(617820091,5);
+insert into personxphone(id_person, id_phone) values(717820091,6);
+insert into personxphone(id_person, id_phone) values(817820091,7);
+insert into personxphone(id_person, id_phone) values(107820091,8);
+insert into personxphone(id_person, id_phone) values(917820091,9);
+/
+
+insert into personchatperson(id_person1, id_person2, message, message_date)
+        values('117820091','107820091','This product doesn`t work properly', to_date('10/09/2020','DD/MM/RR') );
+insert into personchatperson(id_person1, id_person2, message, message_date)
+        values('217820091','517820091','Can you low the price?', to_date('06/1/2020','DD/MM/RR') );
+insert into personchatperson(id_person1, id_person2, message, message_date)
+        values('107820091','117820091','You can do a discount for me?', to_date('10/09/2020','DD/MM/RR') );
+insert into personchatperson(id_person1, id_person2, message, message_date)
+        values('107820091','117820091','You can do a discount for me?', to_date('10/09/2020','DD/MM/RR') );
+insert into personchatperson(id_person1, id_person2, message, message_date)
+        values('117820091','217820091','It has another color?', to_date('12/03/2019','DD/MM/RR') );
+
+
+/
 insert into clock(name,model,description,manifacturing_date,price,id_binnacle,id_Shipping_type, id_Category, id_brand, id_status, id_condition,id_photo) 
 values('Silver  Pocket Watch',' 52.3mm diameter',
         'The watch has a nicely jewelled Swiss stem-winding movement, which is working working well.  The movement is signed Globe, Swiss made. The movement is protected by an inner hinged cover.',  
@@ -302,6 +338,6 @@ values( 'IWC Big Pilot','Big Pilot',
         2013,7500, 29,0,6,8,0,0,39);
         
 
-
+/
 
         
