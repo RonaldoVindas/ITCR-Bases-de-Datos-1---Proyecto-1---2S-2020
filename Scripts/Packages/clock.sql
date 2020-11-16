@@ -1,12 +1,12 @@
 CREATE OR REPLACE PACKAGE control_clock IS
 
-PROCEDURE insert_clock(pid_clock IN NUMBER,pname IN VARCHAR2, pmodel VARCHAR2, pdescription VARCHAR2,  pmanifacturing_Date NUMBER, pprice NUMBER, pid_binnacle NUMBER, pid_shipping_type NUMBER, 
+PROCEDURE insert_clock(pname IN VARCHAR2, pmodel VARCHAR2, pdescription VARCHAR2,  pmanifacturing_Date DATE, pprice NUMBER, pid_binnacle NUMBER, pid_shipping_type NUMBER, 
                                             pid_category NUMBER, pid_brand NUMBER, pid_status NUMBER, pid_condition NUMBER, pid_photo NUMBER);
 PROCEDURE remove_clock(pid_clock IN NUMBER);
 PROCEDURE update_clock_name(pid_clock IN NUMBER, pname IN VARCHAR2);
 PROCEDURE update_clock_model(pid_clock IN NUMBER, pmodel IN VARCHAR2);
 PROCEDURE update_clock_description(pid_clock IN NUMBER, pdescription IN VARCHAR2);
-PROCEDURE update_clock_date(pid_clock IN NUMBER, pmanifacturing_date IN NUMBER);
+PROCEDURE update_clock_date(pid_clock IN NUMBER, pmanifacturing_date IN DATE);
 PROCEDURE update_clock_price(pid_clock IN NUMBER, pprice IN NUMBER);
 PROCEDURE update_clock_id_binnacle(pid_clock IN NUMBER, pid IN NUMBER);
 PROCEDURE update_clock_id_shipping(pid_clock IN NUMBER, pid IN NUMBER);
@@ -18,7 +18,7 @@ PROCEDURE update_clock_id_photo(pid_clock IN NUMBER, pid IN NUMBER);
 FUNCTION getclockName(pid_clock IN NUMBER) RETURN VARCHAR2 ;
 FUNCTION getclockmodel(pid_clock IN NUMBER) RETURN VARCHAR2 ;
 FUNCTION getclockdescription(pid_clock IN NUMBER) RETURN VARCHAR2;
-FUNCTION getclockdate(pid_clock IN NUMBER) RETURN NUMBER;
+FUNCTION getclockdate(pid_clock IN NUMBER) RETURN DATE;
 FUNCTION getclockprice(pid_clock IN NUMBER) RETURN NUMBER;
 FUNCTION getclockidbinnacle(pid_clock IN NUMBER) RETURN NUMBER;
 FUNCTION getclockidshipping(pid_clock IN NUMBER) RETURN NUMBER;
@@ -32,12 +32,12 @@ END control_clock;
 CREATE OR REPLACE PACKAGE BODY control_clock IS
 
 
-PROCEDURE insert_clock(pid_clock IN NUMBER,pname IN VARCHAR2, pmodel VARCHAR2, pdescription VARCHAR2,  pmanifacturing_Date NUMBER, pprice NUMBER, pid_binnacle NUMBER, pid_shipping_type NUMBER, 
+PROCEDURE insert_clock(pname IN VARCHAR2, pmodel VARCHAR2, pdescription VARCHAR2,  pmanifacturing_Date DATE, pprice NUMBER, pid_binnacle NUMBER, pid_shipping_type NUMBER, 
                                             pid_category NUMBER, pid_brand NUMBER, pid_status NUMBER, pid_condition NUMBER, pid_photo NUMBER)AS
 BEGIN 
-	INSERT INTO clock(id_clock, name, model, description,  manifacturing_Date, price, id_binnacle, id_shipping_type, 
+	INSERT INTO clock(name, model, description,  manifacturing_Date, price, id_binnacle, id_shipping_type, 
                                             id_category, id_brand, id_status, id_condition, id_photo)
-	VALUES(pid_clock, pname, pmodel, pdescription,  pmanifacturing_Date, pprice, pid_binnacle, pid_shipping_type, 
+	VALUES(pname, pmodel, pdescription,  pmanifacturing_Date, pprice, pid_binnacle, pid_shipping_type, 
                                             pid_category, pid_brand, pid_status, pid_condition, pid_photo);
 	COMMIT;
 END insert_clock;
@@ -127,7 +127,7 @@ BEGIN
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
 END update_clock_description;
 
-PROCEDURE update_clock_date(pid_clock IN NUMBER, pmanifacturing_date IN NUMBER)AS
+PROCEDURE update_clock_date(pid_clock IN NUMBER, pmanifacturing_date IN DATE)AS
 e_invalid_clock EXCEPTION;
 BEGIN
 	UPDATE clock
@@ -385,9 +385,9 @@ IS
     END;
 
 
-FUNCTION getclockdate(pid_clock IN NUMBER) RETURN NUMBER
+FUNCTION getclockdate(pid_clock IN NUMBER) RETURN DATE
 IS
-    vcPerson NUMBER;
+    vcPerson DATE;
     BEGIN
         SELECT manifacturing_date
         INTO vcPerson

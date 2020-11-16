@@ -2687,27 +2687,26 @@ public static void update_type_person_description(int pid, String pdescription)t
      //////////////////////////////////////////clock/////////////////////////////////////////////
      
      
-     public static void insertClock(int pid_clock,String pname,String pmodel ,String pdescription, 
+     public static void insertClock(String pname,String pmodel ,String pdescription, 
              Date pmanifacturing_date ,int pprice,int pid_binnacle,int pid_shipping_type , int pid_category,int pid_brand,int pid_status,int pid_condition, int pid_photo) throws SQLException{
         String host = "jdbc:oracle:thin:@localhost:1521:DBP";
         String uName = "CL";
         String uPass = "CL";
         
         Connection con = DriverManager.getConnection(host, uName, uPass);
-        CallableStatement stmt = con.prepareCall("{ call control_clock_.insert_clock(?,?,?,?,?,?,?,?,?,?,?,?,?)}");
-        stmt.setInt(1, pid_clock);
-        stmt.setString(2,pname);
-        stmt.setString(3,pmodel);
-        stmt.setString(4,pdescription);
-        stmt.setDate(5, new java.sql.Date(pmanifacturing_date.getTime()));
-        stmt.setInt(6,pprice);
-        stmt.setInt(7, pid_binnacle);
-        stmt.setInt(8, pid_shipping_type);
-        stmt.setInt(9, pid_category);
-        stmt.setInt(10, pid_brand);
-        stmt.setInt(11, pid_status);
-        stmt.setInt(12, pid_condition);
-        stmt.setInt(13, pid_photo);
+        CallableStatement stmt = con.prepareCall("{ call control_clock_.insert_clock(?,?,?,?,?,?,?,?,?,?,?,?)}");
+        stmt.setString(1,pname);
+        stmt.setString(2,pmodel);
+        stmt.setString(3,pdescription);
+        stmt.setDate(4, new java.sql.Date(pmanifacturing_date.getTime()));
+        stmt.setInt(5,pprice);
+        stmt.setInt(6, pid_binnacle);
+        stmt.setInt(7, pid_shipping_type);
+        stmt.setInt(8, pid_category);
+        stmt.setInt(9, pid_brand);
+        stmt.setInt(10, pid_status);
+        stmt.setInt(11, pid_condition);
+        stmt.setInt(12, pid_photo);
         stmt.execute();
              
         
@@ -3104,8 +3103,339 @@ public static void update_type_person_description(int pid, String pdescription)t
         return r;
     }   
    
+   /////////////////////////////////////////////////////////queries//////////////////////////////////////////////////////////////
    
-   
-   
-   
+
+        
+        
+        public static java.sql.ResultSet UsersListQuery()throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ?= call control_queries.usersList()}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        
+        
+        
+        }
+        
+        
+        public static java.sql.ResultSet NewCriminalRecordquery()throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.NewCriminalRecord()}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        }
+        
+        
+        public static java.sql.ResultSet UserWithoutChangequery(int days)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.UserWithoutChange(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, days);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        
+        public static java.sql.ResultSet MostDangerousZonesquery(int days)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.MostDangerousZones(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, days);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        
+        }
+        
+        
+        public static java.sql.ResultSet BanUsersquery()throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.BanUsers()}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+     
+        }
+        
+        public static java.sql.ResultSet ExpiringRecordWithPersonquery()throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.ExpiringRecordWithPerson()}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        public static java.sql.ResultSet personHasFilequery(int pid)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personHasFile(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, pid);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        
+        public static java.sql.ResultSet filesbygenderquery(int pid)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.filesbygender(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, pid);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        
+        public static java.sql.ResultSet crimes_per_monthquery(int pyear)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.crimes_per_month(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, pyear);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        public static java.sql.ResultSet topPersonMostFilesquery(int pnumber)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.topPersonMostFiles(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, pnumber);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        public static java.sql.ResultSet personbycrimequery(int pid)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personbycrime(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, pid);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+      
+       
+        public static java.sql.ResultSet TotalPercentFiles() throws SQLException {   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personbycrime()}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        
+        public static java.sql.ResultSet filesPerZoneALL(String p1,String p2, String p3, String p4) throws SQLException {   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personbycrime(?,?,?,?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+         stmt.setString(2,p1);
+         stmt.setString(3,p2);
+         stmt.setString(4,p3);
+         stmt.setString(5,p4);
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        public static java.sql.ResultSet filesPerZonewd(String p1,String p2, String p3) throws SQLException {   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personbycrime(?,?,?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+         stmt.setString(2,p1);
+         stmt.setString(3,p2);
+         stmt.setString(4,p3);
+ 
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        public static java.sql.ResultSet filesPerZonewc(String p1,String p2) throws SQLException {   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personbycrime(?,?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+         stmt.setString(2,p1);
+         stmt.setString(3,p2);
+ 
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        public static java.sql.ResultSet filesPerZonewp(String p1) throws SQLException {   
+        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        String uName = "PE";
+        String uPass = "PE";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_queries.personbycrime(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.CURSOR);
+         stmt.setString(2,p1);
+
+        java.sql.ResultSet r =  stmt.executeQuery();
+        System.out.println(r);
+        return r;
+        
+        }
+        
+        
+        
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 }
