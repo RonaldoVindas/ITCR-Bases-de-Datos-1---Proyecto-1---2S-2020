@@ -1,4 +1,5 @@
-insert into gender(gender_name) values('female');
+insert into gender(gender_name) values('Male');
+insert into gender(gender_name) values('Female');
 insert into gender(gender_name) values('other');
 
 insert into country(country_name) values('Costa Rica');

@@ -1,17 +1,22 @@
+---Nuevos Alters
+alter table person modify (id_person number(9));
+alter table clock modify (manifacturing_date number(4));
+alter table clock modify (model varchar2(50));
+alter table clock modify (name varchar2(100));
+alter table clock modify (description varchar2(500));
+---
 
-
-
-
-/*alter table personsellClock modify (id_person number(9));
+alter table personsellClock modify (id_person number(9));
+alter table personsellClock modify (id_person number(9));
 alter table person_buy_Clock modify (id_person number(9));
 alter table personwishclock modify (id_person number(9));
 alter table personwishclock modify (id_person number(9));
 alter table personxphone  modify (id_person number(9));
-alter table personchatperson modify (id_person1 number(9), id_person2 number(9));*/
+alter table personchatperson modify (id_person1 number(9), id_person2 number(9));
 
 
 
-
+---
 
 insert into personsellclock(id_person, id_clock) values(117820091,1);
 

@@ -1,3 +1,100 @@
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+Insert into binnacle(last_price) values(0);
+
+/
+
+
+Insert into photo(name, photo_info) values('photoA', 'person1');
+Insert into photo(name, photo_info) values('photoA', 'person2');
+Insert into photo(name, photo_info) values('photoA', 'person3');
+Insert into photo(name, photo_info) values('photoA', 'person4');
+Insert into photo(name, photo_info) values('photoA', 'person5');
+Insert into photo(name, photo_info) values('photoA', 'person6');
+Insert into photo(name, photo_info) values('photoA', 'person7');
+Insert into photo(name, photo_info) values('photoA', 'person8');
+Insert into photo(name, photo_info) values('photoA', 'person9');
+Insert into photo(name, photo_info) values('photoA', 'person10');
+
+
+
+Insert into photo(name, photo_info) values('photoB', 'clock1');
+Insert into photo(name, photo_info) values('photoB', 'clock2');
+Insert into photo(name, photo_info) values('photoB', 'clock3');
+Insert into photo(name, photo_info) values('photoB', 'clock4');
+Insert into photo(name, photo_info) values('photoB', 'clock5');
+Insert into photo(name, photo_info) values('photoB', 'clock6');
+Insert into photo(name, photo_info) values('photoB', 'clock7');
+Insert into photo(name, photo_info) values('photoB', 'clock8');
+Insert into photo(name, photo_info) values('photoB', 'clock9');
+Insert into photo(name, photo_info) values('photoB', 'clock10');
+
+Insert into photo(name, photo_info) values('photoB', 'clock11');
+Insert into photo(name, photo_info) values('photoB', 'clock12');
+Insert into photo(name, photo_info) values('photoB', 'clock13');
+Insert into photo(name, photo_info) values('photoB', 'clock14');
+Insert into photo(name, photo_info) values('photoB', 'clock15');
+Insert into photo(name, photo_info) values('photoB', 'clock16');
+Insert into photo(name, photo_info) values('photoB', 'clock17');
+Insert into photo(name, photo_info) values('photoB', 'clock18');
+Insert into photo(name, photo_info) values('photoB', 'clock19');
+Insert into photo(name, photo_info) values('photoB', 'clock20');
+
+Insert into photo(name, photo_info) values('photoB', 'clock21');
+Insert into photo(name, photo_info) values('photoB', 'clock22');
+Insert into photo(name, photo_info) values('photoB', 'clock23');
+Insert into photo(name, photo_info) values('photoB', 'clock24');
+Insert into photo(name, photo_info) values('photoB', 'clock25');
+Insert into photo(name, photo_info) values('photoB', 'clock26');
+Insert into photo(name, photo_info) values('photoB', 'clock27');
+Insert into photo(name, photo_info) values('photoB', 'clock28');
+Insert into photo(name, photo_info) values('photoB', 'clock29');
+Insert into photo(name, photo_info) values('photoB', 'clock30');
+
+
+/
+
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('117820091','Jose','Blanco',to_date('28/03/99','DD/MM/RR'),'ABC@gmail.com','MuffinTime','ptm123','0','0','1','0','2',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('217820091','Joel','Brenes',to_date('21/08/95','DD/MM/RR'),'JOOO@gmail.com','jolel','asmr321','0','1','1','1','2',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('317820091','Maria','White',to_date('02/11/81','DD/MM/RR'),'mariW@gmail.com','mariii','flores','1','2','1','2','41',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('417820091','Andres','Reyes',to_date('11/05/98','DD/MM/RR'),'Andreyes@gmail.com','faker','alvp1','0','3','1','3','22',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('517820091','Ignes','Salazar',to_date('12/03/70','DD/MM/RR'),'salazarIG@gmail.com','ignite','tuturuuu','1','4','1','4','26',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('617820091','Eduardo','Tosi',to_date('10/04/60','DD/MM/RR'),'tosino@gmail.com','bacon','puddin','0','5','1','5','32',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('717820091','Rachel','Ziegler',to_date('22/06/87','DD/MM/RR'),'RachelZZ@gmail.com','mercy','heros','1','1','1','6','61',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('817820091','Karolina','Rivera',to_date('07/05/00','DD/MM/RR'),'KIRS@gmail.com','River','missing','1','2','1','7','13',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('917820091','Noah','Cambronero',to_date('20/01/92','DD/MM/RR'),'NoahCam@gmail.com','Sliced_Water','paz1515','0','3','1','8','55',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+Insert into CL.PERSON (ID_PERSON,FIRST_NAME,LAST_NAME,BIRTHDAY,EMAIL,USERNAME,USER_PASSWORD,ID_GENDER,ID_NATIONALITY,ID_TYPE_PERSON,ID_PHOTO,ID_DISTRICT,CREATION_DATE,CREATION_USER,DATE_LAST_MODIFICATION,USER_LAST_MODIFICATION) values ('107820091','Diego','Rodriguez',to_date('02/07/98','DD/MM/RR'),'Diegor@gmail.com','IDIR','clave','0','4','0','9','13',to_date('12/11/20','DD/MM/RR'),'CL',null,null);
+
+
+
+/
 
 
 insert into clock(name,model,description,manifacturing_date,price,id_binnacle,id_Shipping_type, id_Category, id_brand, id_status, id_condition,id_photo) 
@@ -131,7 +228,7 @@ values('Retro mens diving watch | huge automatic unisex ','analog',
 insert into clock(name,model,description,manifacturing_date,price,id_binnacle,id_Shipping_type, id_Category, id_brand, id_status, id_condition,id_photo) 
 values('Smart Apnea Dive Computer','Unknown',
         'Smart Apnea is very simple and intuitive to use,Customizable program settings  ', 
-        218,600, 20,0,3,0,0,0,30);
+        2018,600, 20,0,3,0,0,0,30);
         
         
         

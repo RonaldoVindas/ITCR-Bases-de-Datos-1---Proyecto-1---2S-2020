@@ -3,7 +3,7 @@ ADD id_person_reviewed number(9);
 
 ALTER TABLE personxreview
 ADD CONSTRAINT fk__person_reviewed FOREIGN KEY
-(id_person_reviewed) REFERENCES person(id_person);
+(id_person_reviewed) REFERENCES person(id_person); /**/
 
 
 

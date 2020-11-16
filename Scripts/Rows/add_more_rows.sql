@@ -1,4 +1,4 @@
-/*insert into canton(canton_name, id_province) values('Puntarenas',6);
+insert into canton(canton_name, id_province) values('Puntarenas',6);
 insert into canton(canton_name, id_province) values('Buenos Aires',6);
 insert into canton(canton_name, id_province) values('Corredores',6);
 insert into canton(canton_name, id_province) values('Coto Brus',6);
@@ -7,7 +7,7 @@ insert into canton(canton_name, id_province) values('Garabito',6);
 insert into canton(canton_name, id_province) values('Golfito',6);
 insert into canton(canton_name, id_province) values('Montes de Oro',6);
 insert into canton(canton_name, id_province) values('Osa',6);
-insert into canton(canton_name, id_province) values('Parrita',6); */
+insert into canton(canton_name, id_province) values('Parrita',6); 
 
 
 INSERT INTO district (id_canton, district_name) VALUES (0,'Carmen');
@@ -91,4 +91,4 @@ INSERT INTO district (id_canton, district_name) VALUES(9,'San Rafael');
 
 
 
-                                 INSERT INTO district (id_canton, district_name) VALUES(40,'San Josecito');
+INSERT INTO district (id_canton, district_name) VALUES(40,'San Josecito');
