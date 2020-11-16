@@ -9,7 +9,7 @@ function MostExpensiveClocks(pNumber in number,pdescription in varchar) return s
 function MaxMinPerCategory(pdescription in varchar) return sys_refcursor;
 end admin_queries;
 /
-CREATE OR REPLACE PACKAGE BODY admin_queries IS
+create or replace PACKAGE BODY admin_queries IS
 
 function TopSellers(pNumber in number)
 return sys_refcursor
@@ -65,9 +65,9 @@ join review c
 on b.id_review=c.id_review
 join reviewxreview_type d
 on c.id_review=d.id_review
-where d.id_review_type=0
-group by a.first_name, a.last_name  order by count(1) desc)
-where rownum <= 15;
+where d.id_review_type=1
+group by a.first_name, a.last_name  order by average desc)
+where rownum <= 5;
 return vcCursor;
 end;
 
@@ -89,9 +89,9 @@ join review c
 on b.id_review=c.id_review
 join reviewxreview_type d
 on c.id_review=d.id_review
-where d.id_review_type=1
-group by a.first_name, a.last_name  order by count(1) desc)
-where rownum <= 15;
+where d.id_review_type=0
+group by a.first_name, a.last_name  order by average desc)
+where rownum <= 5;
 return vcCursor;
 end;
 
@@ -113,9 +113,9 @@ join review c
 on b.id_review=c.id_review
 join reviewxreview_type d
 on c.id_review=d.id_review
-where d.id_review_type=0
-group by a.first_name, a.last_name  order by count(1) asc)
-where rownum <= 15;
+where d.id_review_type=1
+group by a.first_name, a.last_name  order by average asc)
+where rownum <= 5;
 return vcCursor;
 end;
 
@@ -136,9 +136,9 @@ join review c
 on b.id_review=c.id_review
 join reviewxreview_type d
 on c.id_review=d.id_review
-where d.id_review_type=1
+where d.id_review_type=0
 group by a.first_name, a.last_name  order by count(1) asc)
-where rownum <= 15;
+where rownum <= 5;
 return vcCursor;
 end;
 
@@ -168,16 +168,15 @@ as
 vcCursor sys_refcursor;
 begin 
 open vcCursor for
-select max(a.price), min(price), a.name
+select max(a.price), min(price), b.description
 from clock a
 join category b
 on a.id_category=b.id_category
-where b.description=pdescription;
+group by b.description;
 return vcCursor;
 end;
 
 end admin_queries;
-
 
 
 
