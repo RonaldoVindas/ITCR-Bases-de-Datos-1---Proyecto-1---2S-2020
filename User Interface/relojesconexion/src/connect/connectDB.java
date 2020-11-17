@@ -1204,6 +1204,85 @@ public static void update_type_person_description(int pid, String pdescription)t
         System.out.println(r);
         return r;
     }
+    /////////////////////////////////////////////////////////photo/////////////////////////////////////////////////////////////
+    public static void insert_photo(String pdescription)throws SQLException{
+        String host = "jdbc:oracle:thin:@localhost:1521:DBP";
+        String uName = "CL";
+        String uPass = "CL";
+        
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ call control_photo.insert_photo(?)}");
+        stmt.setString(1,pdescription);
+        stmt.execute();
+       
+       } 
+
+      public static void remove_photo(int pid)throws SQLException{
+        String host = "jdbc:oracle:thin:@localhost:1521:DBP";
+        String uName = "CL";
+        String uPass = "CL";
+        
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ call control_photo.remove_photo(?)}");
+        stmt.setInt(1,pid);
+        stmt.execute();
+       
+       } 
+
+
+      
+      public static void update_photo_name(int pid,String pdescription )throws SQLException{
+        String host = "jdbc:oracle:thin:@localhost:1521:DBP";
+        String uName = "CL";
+        String uPass = "CL";
+        
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ call control_photo.update_photo(?,?)}");
+        stmt.setInt(1, pid);
+        stmt.setString(2,pdescription);
+        stmt.execute();
+       
+       } 
+      
+      
+      
+    public static String getphotoname(int pid)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:DBP";
+        String uName = "CL";
+        String uPass = "CL";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_photo.getphotoname(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.INTEGER);
+        stmt.setInt(2, pid);
+        stmt.executeQuery();
+        String r =  stmt.getString(1);
+
+        System.out.println(r);
+        return r;
+    }
+    public static int getIDphoto(int pnumber)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:DBP";
+        String uName = "CL";
+        String uPass = "CL";
+
+        Connection con = DriverManager.getConnection(host, uName, uPass);
+        CallableStatement stmt = con.prepareCall("{ ? = call control_photo.get_photo_id(?)}");
+
+
+
+        stmt.registerOutParameter(1, OracleTypes.INTEGER);
+        stmt.setInt(2, pnumber);
+        stmt.executeQuery();
+        int r =  stmt.getInt(1);
+
+        System.out.println(r);
+        return r;
+    }
+    
     
     
     //////////////////////////////////////////////////////review/////////////////////////////////////////////////////////
@@ -3108,17 +3187,19 @@ public static void update_type_person_description(int pid, String pdescription)t
 
         
         
-        public static java.sql.ResultSet UsersListQuery()throws SQLException{   
-        String host = "jdbc:oracle:thin:@localhost:1521:BDProyecto";
+        public static java.sql.ResultSet searchClock(int pidCategory,int pidBrand,int pidCondition,
+                int pidShipping,String pmodel,int pid_clock)throws SQLException{   
+        String host = "jdbc:oracle:thin:@localhost:1521:DBP";
         String uName = "PE";
         String uPass = "PE";
 
         Connection con = DriverManager.getConnection(host, uName, uPass);
-        CallableStatement stmt = con.prepareCall("{ ?= call control_queries.usersList()}");
+        CallableStatement stmt = con.prepareCall("{ ?= call users_queries.searchClock(?,?,?,?,?,?)}");
 
 
 
         stmt.registerOutParameter(1, OracleTypes.CURSOR);
+        stmt.setInt(2, pid);
         java.sql.ResultSet r =  stmt.executeQuery();
         System.out.println(r);
         return r;
