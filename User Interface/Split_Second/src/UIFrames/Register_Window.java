@@ -7,8 +7,14 @@ package UIFrames;
 
 import java.awt.Color;
 import java.io.File;
+import java.sql.Date;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
+import DBConnection.ConnectDB;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author Ronaldo
@@ -41,7 +47,7 @@ public class Register_Window extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         DecorationPanel = new javax.swing.JPanel();
         LastName_TextField = new javax.swing.JTextField();
-        Username_TextField = new javax.swing.JTextField();
+        Day_TextFied = new javax.swing.JTextField();
         Password_TextField = new javax.swing.JTextField();
         NewUser_Label = new javax.swing.JLabel();
         RegisterButton_Panel = new javax.swing.JPanel();
@@ -51,10 +57,7 @@ public class Register_Window extends javax.swing.JFrame {
         Email_TextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         FirstName_TextField = new javax.swing.JTextField();
-        birth_day_day = new javax.swing.JComboBox<>();
-        gender_combobox = new javax.swing.JComboBox<>();
-        birth_day_month = new javax.swing.JComboBox<>();
-        birth_day_year = new javax.swing.JComboBox<>();
+        Gender_combobox = new javax.swing.JComboBox<>();
         Photo_Button = new javax.swing.JButton();
         Password_Label = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -63,6 +66,9 @@ public class Register_Window extends javax.swing.JFrame {
         Last_Name_Label1 = new javax.swing.JLabel();
         Email_Label = new javax.swing.JLabel();
         Password_Label1 = new javax.swing.JLabel();
+        Username_TextField1 = new javax.swing.JTextField();
+        Year_TextField = new javax.swing.JTextField();
+        Month_TextField = new javax.swing.JTextField();
         NewUser_Label1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -118,26 +124,26 @@ public class Register_Window extends javax.swing.JFrame {
         });
         DecorationPanel.add(LastName_TextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 360, 20));
 
-        Username_TextField.setBackground(new java.awt.Color(255, 255, 255));
-        Username_TextField.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        Username_TextField.setForeground(new java.awt.Color(32, 21, 14));
-        Username_TextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        Username_TextField.setBorder(null);
-        Username_TextField.setCaretColor(new java.awt.Color(44, 168, 109));
-        Username_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+        Day_TextFied.setBackground(new java.awt.Color(255, 255, 255));
+        Day_TextFied.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Day_TextFied.setForeground(new java.awt.Color(32, 21, 14));
+        Day_TextFied.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        Day_TextFied.setBorder(null);
+        Day_TextFied.setCaretColor(new java.awt.Color(44, 168, 109));
+        Day_TextFied.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                Username_TextFieldMouseEntered(evt);
+                Day_TextFiedMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                Username_TextFieldMouseExited(evt);
+                Day_TextFiedMouseExited(evt);
             }
         });
-        Username_TextField.addActionListener(new java.awt.event.ActionListener() {
+        Day_TextFied.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Username_TextFieldActionPerformed(evt);
+                Day_TextFiedActionPerformed(evt);
             }
         });
-        DecorationPanel.add(Username_TextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 360, 20));
+        DecorationPanel.add(Day_TextFied, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 430, 70, 20));
 
         Password_TextField.setBackground(new java.awt.Color(255, 255, 255));
         Password_TextField.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -265,45 +271,15 @@ public class Register_Window extends javax.swing.JFrame {
         });
         DecorationPanel.add(FirstName_TextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 360, 20));
 
-        birth_day_day.setBackground(new java.awt.Color(255, 255, 255));
-        birth_day_day.setForeground(new java.awt.Color(32, 21, 14));
-        birth_day_day.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        birth_day_day.addActionListener(new java.awt.event.ActionListener() {
+        Gender_combobox.setBackground(new java.awt.Color(255, 255, 255));
+        Gender_combobox.setForeground(new java.awt.Color(32, 21, 14));
+        Gender_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
+        Gender_combobox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                birth_day_dayActionPerformed(evt);
+                Gender_comboboxActionPerformed(evt);
             }
         });
-        DecorationPanel.add(birth_day_day, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 420, 80, -1));
-
-        gender_combobox.setBackground(new java.awt.Color(255, 255, 255));
-        gender_combobox.setForeground(new java.awt.Color(32, 21, 14));
-        gender_combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
-        gender_combobox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                gender_comboboxActionPerformed(evt);
-            }
-        });
-        DecorationPanel.add(gender_combobox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 260, -1));
-
-        birth_day_month.setBackground(new java.awt.Color(255, 255, 255));
-        birth_day_month.setForeground(new java.awt.Color(32, 21, 14));
-        birth_day_month.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        birth_day_month.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                birth_day_monthActionPerformed(evt);
-            }
-        });
-        DecorationPanel.add(birth_day_month, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 420, 80, -1));
-
-        birth_day_year.setBackground(new java.awt.Color(255, 255, 255));
-        birth_day_year.setForeground(new java.awt.Color(32, 21, 14));
-        birth_day_year.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        birth_day_year.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                birth_day_yearActionPerformed(evt);
-            }
-        });
-        DecorationPanel.add(birth_day_year, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, 80, -1));
+        DecorationPanel.add(Gender_combobox, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 390, 260, -1));
 
         Photo_Button.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         Photo_Button.setForeground(new java.awt.Color(153, 153, 153));
@@ -334,7 +310,7 @@ public class Register_Window extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Birth Day:");
-        DecorationPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, 90, 30));
+        DecorationPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, 90, 30));
 
         Identification_Label.setBackground(new java.awt.Color(255, 255, 255));
         Identification_Label.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -362,6 +338,69 @@ public class Register_Window extends javax.swing.JFrame {
         Password_Label1.setText("Password:");
         DecorationPanel.add(Password_Label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, 30));
 
+        Username_TextField1.setBackground(new java.awt.Color(255, 255, 255));
+        Username_TextField1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Username_TextField1.setForeground(new java.awt.Color(32, 21, 14));
+        Username_TextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        Username_TextField1.setBorder(null);
+        Username_TextField1.setCaretColor(new java.awt.Color(44, 168, 109));
+        Username_TextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Username_TextField1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Username_TextField1MouseExited(evt);
+            }
+        });
+        Username_TextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Username_TextField1ActionPerformed(evt);
+            }
+        });
+        DecorationPanel.add(Username_TextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 340, 360, 20));
+
+        Year_TextField.setBackground(new java.awt.Color(255, 255, 255));
+        Year_TextField.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Year_TextField.setForeground(new java.awt.Color(32, 21, 14));
+        Year_TextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        Year_TextField.setBorder(null);
+        Year_TextField.setCaretColor(new java.awt.Color(44, 168, 109));
+        Year_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Year_TextFieldMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Year_TextFieldMouseExited(evt);
+            }
+        });
+        Year_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Year_TextFieldActionPerformed(evt);
+            }
+        });
+        DecorationPanel.add(Year_TextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 430, 70, 20));
+
+        Month_TextField.setBackground(new java.awt.Color(255, 255, 255));
+        Month_TextField.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        Month_TextField.setForeground(new java.awt.Color(32, 21, 14));
+        Month_TextField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        Month_TextField.setBorder(null);
+        Month_TextField.setCaretColor(new java.awt.Color(44, 168, 109));
+        Month_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                Month_TextFieldMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                Month_TextFieldMouseExited(evt);
+            }
+        });
+        Month_TextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Month_TextFieldActionPerformed(evt);
+            }
+        });
+        DecorationPanel.add(Month_TextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 430, 70, 20));
+
         jPanel1.add(DecorationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 630, 480));
 
         NewUser_Label1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
@@ -374,23 +413,61 @@ public class Register_Window extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Username_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Username_TextFieldActionPerformed
+    private void Day_TextFiedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Day_TextFiedActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Username_TextFieldActionPerformed
+    }//GEN-LAST:event_Day_TextFiedActionPerformed
 
     private void Register_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Register_ButtonActionPerformed
         User_Main_Menu result = new User_Main_Menu();
         result.setVisible(true);
         this.setVisible(false);
+        
+        int new_person_identification;
+        String new_person_first_name;
+        String new_person_last_name;
+        String new_person_email;
+        String new_person_password;
+        String new_person_username;
+        String new_person_birthay_year;
+        String new_person_birthday_month;
+        String new_person_birthday_day;
+
+            
+        new_person_identification = Integer.parseInt(Identification_TextField.getText());
+        new_person_first_name = FirstName_TextField.getText();
+        new_person_last_name = LastName_TextField.getText();
+        new_person_email = Email_TextField.getText();
+        new_person_password = Password_TextField.getText();
+        new_person_username = Username_TextField1.getText();
+        new_person_birthay_year = Year_TextField.getText();
+        new_person_birthday_month = Month_TextField.getText();
+        new_person_birthday_day = Day_TextFied.getText();
+
+        int new_person_gender = Gender_combobox.getSelectedIndex();
+        
+        new_person_birthay_year = Year_TextField.getText();
+        new_person_birthday_month = Month_TextField.getText();
+        new_person_birthday_day = Day_TextFied.getText();
+        
+        String new_person_birthday = new_person_birthday_day +"/"+new_person_birthday_month+"/"+new_person_birthay_year;
+        System.out.println(new_person_birthday);
+        try {
+            ConnectDB.insertUser(new_person_identification, new_person_first_name, new_person_last_name, new_person_birthday, new_person_email,new_person_password,new_person_username,new_person_gender,0, 1,1);
+        } catch (SQLException ex) {
+            Logger.getLogger(Register_Window.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      
+        
     }//GEN-LAST:event_Register_ButtonActionPerformed
 
-    private void Username_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Username_TextFieldMouseEntered
-        Username_TextField.setBackground(new java.awt.Color(216,216,216));
-    }//GEN-LAST:event_Username_TextFieldMouseEntered
+    private void Day_TextFiedMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Day_TextFiedMouseEntered
+        Day_TextFied.setBackground(new java.awt.Color(216,216,216));
+    }//GEN-LAST:event_Day_TextFiedMouseEntered
 
-    private void Username_TextFieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Username_TextFieldMouseExited
-        Username_TextField.setBackground(new java.awt.Color(255,255,255));
-    }//GEN-LAST:event_Username_TextFieldMouseExited
+    private void Day_TextFiedMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Day_TextFiedMouseExited
+        Day_TextFied.setBackground(new java.awt.Color(255,255,255));
+    }//GEN-LAST:event_Day_TextFiedMouseExited
 
     private void Password_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Password_TextFieldMouseEntered
         Password_TextField.setBackground(new java.awt.Color(216,216,216));
@@ -460,21 +537,9 @@ public class Register_Window extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FirstName_TextFieldActionPerformed
 
-    private void birth_day_dayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birth_day_dayActionPerformed
+    private void Gender_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Gender_comboboxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_birth_day_dayActionPerformed
-
-    private void gender_comboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gender_comboboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_gender_comboboxActionPerformed
-
-    private void birth_day_monthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birth_day_monthActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_birth_day_monthActionPerformed
-
-    private void birth_day_yearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_birth_day_yearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_birth_day_yearActionPerformed
+    }//GEN-LAST:event_Gender_comboboxActionPerformed
 
     private void Photo_ButtonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Photo_ButtonMouseEntered
         // TODO add your handling code here:
@@ -491,6 +556,42 @@ public class Register_Window extends javax.swing.JFrame {
     private void Exit_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit_ButtonActionPerformed
         System.exit(0);
     }//GEN-LAST:event_Exit_ButtonActionPerformed
+
+    private void Username_TextField1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Username_TextField1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Username_TextField1MouseEntered
+
+    private void Username_TextField1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Username_TextField1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Username_TextField1MouseExited
+
+    private void Username_TextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Username_TextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Username_TextField1ActionPerformed
+
+    private void Year_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Year_TextFieldMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Year_TextFieldMouseEntered
+
+    private void Year_TextFieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Year_TextFieldMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Year_TextFieldMouseExited
+
+    private void Year_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Year_TextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Year_TextFieldActionPerformed
+
+    private void Month_TextFieldMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Month_TextFieldMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Month_TextFieldMouseEntered
+
+    private void Month_TextFieldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Month_TextFieldMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Month_TextFieldMouseExited
+
+    private void Month_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Month_TextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Month_TextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -532,16 +633,19 @@ public class Register_Window extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Clock;
+    private javax.swing.JTextField Day_TextFied;
     private javax.swing.JPanel DecorationPanel;
     private javax.swing.JLabel Email_Label;
     private javax.swing.JTextField Email_TextField;
     private javax.swing.JButton Exit_Button;
     private javax.swing.JTextField FirstName_TextField;
     private javax.swing.JLabel First_Name_Label1;
+    private javax.swing.JComboBox<String> Gender_combobox;
     private javax.swing.JLabel Identification_Label;
     private javax.swing.JTextField Identification_TextField;
     private javax.swing.JTextField LastName_TextField;
     private javax.swing.JLabel Last_Name_Label1;
+    private javax.swing.JTextField Month_TextField;
     private javax.swing.JLabel NewUser_Label;
     private javax.swing.JLabel NewUser_Label1;
     private javax.swing.JLabel Password_Label;
@@ -550,11 +654,8 @@ public class Register_Window extends javax.swing.JFrame {
     private javax.swing.JButton Photo_Button;
     private javax.swing.JPanel RegisterButton_Panel;
     private javax.swing.JButton Register_Button;
-    private javax.swing.JTextField Username_TextField;
-    private javax.swing.JComboBox<String> birth_day_day;
-    private javax.swing.JComboBox<String> birth_day_month;
-    private javax.swing.JComboBox<String> birth_day_year;
-    private javax.swing.JComboBox<String> gender_combobox;
+    private javax.swing.JTextField Username_TextField1;
+    private javax.swing.JTextField Year_TextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
