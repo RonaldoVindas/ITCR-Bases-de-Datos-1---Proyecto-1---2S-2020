@@ -1,6 +1,7 @@
 create or replace package control_personwishclock is
 PROCEDURE insert_personwishclock (pid_person IN NUMBER, pid_clock NUMBER);
 PROCEDURE remove_personwishclock (pid_person IN NUMBER);
+PROCEDURE remove_personwishclock_clock (pid_clock IN NUMBER);
 PROCEDURE update_pwc_id_person(pid_person IN NUMBER, pnewid NUMBER);
 PROCEDURE update_pwc_id_clock(pid_clock IN NUMBER, pnewid NUMBER);
 FUNCTION getpersonwishclockIdPerson(pid_clock IN NUMBER) RETURN NUMBER;
@@ -36,6 +37,26 @@ begin
         DBMS_OUTPUT.PUT_LINE(SQLERRM);
         DBMS_OUTPUT.PUT_LINE(SQLCODE);
 end remove_personwishclock;
+
+PROCEDURE remove_personwishclock_clock (pid_clock IN NUMBER)AS
+e_invalid_exc EXCEPTION;
+begin
+    delete from personwishclock
+    where id_clock= pid_clock;
+    commit;
+    IF SQL%NOTFOUND THEN 
+        RAISE e_invalid_exc;
+    END IF;
+    EXCEPTION
+    WHEN e_invalid_exc THEN
+        DBMS_OUTPUT.PUT_LINE('No such row.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('An error has ocurred in the attempt to remove.');
+        DBMS_OUTPUT.PUT_LINE(SQLERRM);
+        DBMS_OUTPUT.PUT_LINE(SQLCODE);
+end remove_personwishclock_clock;
 
 PROCEDURE update_pwc_id_person(pid_person IN NUMBER, pnewid NUMBER)AS
 e_invalid_exc EXCEPTION;

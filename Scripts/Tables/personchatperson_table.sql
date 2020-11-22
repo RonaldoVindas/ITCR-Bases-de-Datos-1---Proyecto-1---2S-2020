@@ -65,6 +65,7 @@ BEFORE INSERT
 ON cl.personchatperson
 FOR EACH ROW
 BEGIN
+	:new.message_date := SYSDATE;
     :new.creation_date := SYSDATE;
     :new.creation_user := USER;
 END beforeInsertpersonchatperson; 

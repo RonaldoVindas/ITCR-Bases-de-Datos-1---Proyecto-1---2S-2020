@@ -1,0 +1,87 @@
+#Morado
+	#AD11C6
+#Dorado**				Íconos lateral, Mouse Retired
+	#5C4F2E		92,79,46
+#Dorado Oscuro 				Íconos, MouseEntered
+	#443A22   	68,58,34
+
+#Dorado Claro*				InternalFrame Header
+	#988E62		152,142,98
+#Beige
+	#ADA47B
+#Beige Claro
+	#B79F63		183,159,99
+
+
+#Cafe					Texto
+	#20150E		32,21,14
+
+#Cafe Claro
+	#392519		57,37,25
+#Blanco un poco oscuro
+ 	#D8D8D8         216,216,216
+#Blanco
+	#FFFFFF		255,255,255
+
+Consolas 48
+tahoma 36
+
+
+
+
+
+
+
+
+
+try {
+            String host = "jdbc:oracle:thin:@localhost:1521:DBRONALDO";
+            String uName = "CL";
+            String uPass = "CL";
+
+            Connection con = DriverManager.getConnection(host, uName, uPass);
+
+            PreparedStatement pst = con.prepareStatement("select name from brand");////////////////////////////////////////////
+            ResultSet res = pst.executeQuery();
+             
+
+            while(res.next()){
+                 Brand_jComboBox.addItem(res.getString(1));
+                 
+                 
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+        }
+
+/////////////////////
+ String productId = String.valueOf(ProductResultlist_JTable.getValueAt(ProductResultlist_JTable.getSelectedRow(),0)); // pId = id_product 
+            int pId = Integer.parseInt(productId);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

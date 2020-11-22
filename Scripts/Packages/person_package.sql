@@ -28,9 +28,15 @@ FUNCTION getPersonIdNationality(pid_person IN NUMBER) RETURN NUMBER;
 FUNCTION getPersonIdTypePerson(pid_person IN NUMBER) RETURN NUMBER;
 FUNCTION getPersonIdDistrict(pid_person IN NUMBER) RETURN NUMBER;
 FUNCTION getPersonIdPhoto(pid_person IN NUMBER) RETURN NUMBER;
+FUNCTION getPersonIdentification(pid_person IN NUMBER) RETURN VARCHAR2 ;
 
 END control_person; 
 /
+
+
+
+
+
 CREATE OR REPLACE PACKAGE BODY control_person IS
 
 FUNCTION EncryptPassword(pencrypt_password IN VARCHAR2) RETURN VARCHAR2
@@ -597,7 +603,28 @@ IS
             WHEN OTHERS THEN
             DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
     END;
-
+    
+FUNCTION getPersonIdentification(pusername IN VARCHAR2) RETURN NUMBER
+IS 
+    vcPersonID NUMBER(9);
+    BEGIN
+        SELECT id_person
+        INTO vcPersonID
+        FROM person
+        WHERE username = pusername;
+        RETURN(vcPersonID);
+        EXCEPTION
+            WHEN TOO_MANY_ROWS THEN
+            DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+            WHEN NO_DATA_FOUND THEN
+            DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcnombre.');
+            WHEN STORAGE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+            WHEN VALUE_ERROR THEN
+            DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+            WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+    END;
 
 
 

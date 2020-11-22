@@ -5,7 +5,6 @@
  */
 package UIFrames;
 
-import DBConnection.ConnectDB;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -25,7 +24,6 @@ public class Login_Window extends javax.swing.JFrame {
         this.setUndecorated(true);
         initComponents();
         this.setLocationRelativeTo(null);
-        
     }
 
     /**
@@ -37,20 +35,24 @@ public class Login_Window extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         Exit_Button = new javax.swing.JButton();
         DecorationPanel = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         Username_TextField = new javax.swing.JTextField();
-        jLabelUsername = new javax.swing.JLabel();
-        jLabelPassword = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         Password_TextField = new javax.swing.JPasswordField();
         LoginButton_Panel1 = new javax.swing.JPanel();
         Login_Button1 = new javax.swing.JButton();
         LoginButton_Panel = new javax.swing.JPanel();
         Login_Button = new javax.swing.JButton();
-        jLabelLogIntext = new javax.swing.JLabel();
-        Jlabeltext1prices = new javax.swing.JLabel();
-        jLabelgoldpink = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Login Menu.jpg"))); // NOI18N
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -94,15 +96,15 @@ public class Login_Window extends javax.swing.JFrame {
         });
         jPanel1.add(Username_TextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 370, 40));
 
-        jLabelUsername.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabelUsername.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelUsername.setText("Username or Email:");
-        jPanel1.add(jLabelUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 230, 30));
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Username or Email:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 230, 30));
 
-        jLabelPassword.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabelPassword.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelPassword.setText("Password:");
-        jPanel1.add(jLabelPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 120, 30));
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Password:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 120, 30));
 
         Password_TextField.setBackground(new java.awt.Color(255, 255, 255));
         Password_TextField.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -164,17 +166,17 @@ public class Login_Window extends javax.swing.JFrame {
 
         DecorationPanel.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 520, 370));
 
-        jLabelLogIntext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login_text(1).png"))); // NOI18N
-        DecorationPanel.add(jLabelLogIntext, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 520, 110));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/login_text(1).png"))); // NOI18N
+        DecorationPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 520, 110));
 
         getContentPane().add(DecorationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 0, 620, 720));
 
-        Jlabeltext1prices.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/text_1.png"))); // NOI18N
-        Jlabeltext1prices.setText("jLabel2");
-        getContentPane().add(Jlabeltext1prices, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 500, 60));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/text_1.png"))); // NOI18N
+        jLabel2.setText("jLabel2");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 430, 500, 60));
 
-        jLabelgoldpink.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Gold2.jpg"))); // NOI18N
-        getContentPane().add(jLabelgoldpink, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 710, 720));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/Gold2.jpg"))); // NOI18N
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-70, 0, 710, 720));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -191,36 +193,35 @@ public class Login_Window extends javax.swing.JFrame {
        String pUsername = Username_TextField.getText();
        String pPassword = Password_TextField.getText(); 
        
-       
+       Admin_Main_Menu result = new Admin_Main_Menu();
+             result.setVisible(true); 
+             this.setVisible(false);
+       /*
         try {
-            int identification = ConnectDB.getPersonIdentification(pUsername);
-            Split_Second.Split_Second.identification = identification;
-            System.out.println(identification);
-        
-            
-            
-            
+           /* int identification = Connection.DBConnection.get_person_identification(pUsername);*/
+            /*Split_Second.Split_Second.identification = identification;*/
+        /* 
         } catch (SQLException ex) {
             Logger.getLogger(Login_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
+       /*
        
-      
        
        int res = 0;
        
         try {
-            res = DBConnection.ConnectDB.getPersonIdTypePerson(Split_Second.Split_Second.identification);
+            res = Connection.DBConnection.get_Login(pUsername, pPassword);
             
         } catch (SQLException ex) {
             Logger.getLogger(Login_Window.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (res == 0){ //Si es Admin
+        if (res == 1){ //Si es Admin
              Admin_Main_Menu result = new Admin_Main_Menu();
              result.setVisible(true); 
              this.setVisible(false);
              
         }
-        else if (res == 1){ // Si es User
+        else if (res == 2){ // Si es User
              User_Main_Menu result = new User_Main_Menu();
              result.setVisible(true); 
              this.setVisible(false);
@@ -230,7 +231,7 @@ public class Login_Window extends javax.swing.JFrame {
            
         }
        
-        
+        */
           
     }//GEN-LAST:event_Login_ButtonActionPerformed
 
@@ -306,17 +307,18 @@ public class Login_Window extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DecorationPanel;
     private javax.swing.JButton Exit_Button;
-    private javax.swing.JLabel Jlabeltext1prices;
     private javax.swing.JPanel LoginButton_Panel;
     private javax.swing.JPanel LoginButton_Panel1;
     private javax.swing.JButton Login_Button;
     private javax.swing.JButton Login_Button1;
     private javax.swing.JPasswordField Password_TextField;
     private javax.swing.JTextField Username_TextField;
-    private javax.swing.JLabel jLabelLogIntext;
-    private javax.swing.JLabel jLabelPassword;
-    private javax.swing.JLabel jLabelUsername;
-    private javax.swing.JLabel jLabelgoldpink;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

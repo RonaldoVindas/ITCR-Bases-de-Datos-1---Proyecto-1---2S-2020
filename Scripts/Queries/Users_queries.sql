@@ -1,5 +1,5 @@
 create or replace package users_queries is
-function SearchClock(pidCategory number, pidBrand number, pidCondition number, pidShipping number, pmodel varchar, pid_clock number)
+function SearchClock(pName VARCHAR2, pidCategory number, pidBrand number, pidCondition number, pidShipping number, pmodel varchar, pid_clock number,pPrice NUMBER)
 return sys_refcursor;
 function UserBuyHistory(pidUser number)return sys_refcursor;
 function UserSellHistory (pidUser number,pid_status number)
@@ -11,7 +11,7 @@ end users_queries;
 /
 CREATE OR REPLACE PACKAGE BODY users_queries IS
 
-function SearchClock(pidCategory number, pidBrand number, pidCondition number, pidShipping number, pmodel varchar, pid_clock number)
+function SearchClock(pName VARCHAR2, pidCategory number, pidBrand number, pidCondition number, pidShipping number, pmodel varchar, pid_clock number, pPrice NUMBER)
 return sys_refcursor
 as
 vcCursor sys_refcursor;
@@ -29,8 +29,8 @@ join Shipping_type e
 on a.id_shipping_Type=e.id_shipping_type
 join status f
 on a.id_status=f.id_status
-where f.id_status=0 and     d.id_condition= NVL(pidCondition, d.id_condition) and b.id_brand = NVL(pidbrand, b.id_brand) 
-and e.id_shipping_type= NVL(pidShipping, e.id_shipping_type)and c.id_category= NVL(pidCategory, c.id_category) and  a.model= NVL(pmodel, a.model) and a.id_clock= NVL(pid_clock,a.id_clock);
+where f.id_status=0 and  a.name= NVL(pName, a.name) and d.id_condition= NVL(pidCondition, d.id_condition) and b.id_brand = NVL(pidbrand, b.id_brand) 
+and e.id_shipping_type= NVL(pidShipping, e.id_shipping_type)and c.id_category= NVL(pidCategory, c.id_category) and  a.model= NVL(pmodel, a.model) and a.id_clock= NVL(pid_clock,a.id_clock) and a.price= NVL(pPrice, a.price);
 return vcCursor;
 end;
 

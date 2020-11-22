@@ -4,6 +4,7 @@ procedure remove_review(pid in number);
 procedure update_review(p_name in varchar2, pid number);
 function getReview(pId in number) return varchar2 ;
 function getIDreview(p_review in varchar2)return number;
+function getReviewStars(pId in number)return number;
 end control_review;
 /
 create or replace PACKAGE BODY control_review IS
@@ -86,6 +87,27 @@ begin
     into vcID
     from review
     where stars=p_review;
+    return vcID;
+    EXCEPTION
+        WHEN TOO_MANY_ROWS THEN
+        DBMS_OUTPUT.PUT_LINE ('Your SELECT statement retrieved multiple rows.');
+        WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE ('Could not find a register with the name||pcanton.');
+        WHEN STORAGE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE ('PL/SQL ran out of memory or memory is corrupted.');
+        WHEN VALUE_ERROR THEN
+        DBMS_OUTPUT.PUT_LINE ('An arithmetic, conversion, truncation, or size constraint error ocurred.');
+        WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE ('Unexpected error.');
+end;
+
+function getReviewStars(pId in number)return number;
+is vcID NUMBER(10);
+begin
+    select stars
+    into vcID
+    from review
+    where id_review=piD;
     return vcID;
     EXCEPTION
         WHEN TOO_MANY_ROWS THEN
